@@ -1,5 +1,9 @@
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
+## install cheerio
+
+Cheerio parses markup and provides an API for traversing/manipulating the resulting data structure.
+
 ## Available Scripts
 
 In the project directory, you can run:
