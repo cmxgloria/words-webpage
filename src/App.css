@@ -1,5 +1,7 @@
 .App {
+  justify-content: center;
   text-align: center;
+  height: 100vh;
 }
 
 .img {
@@ -16,10 +18,6 @@
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: white;
-}
-
-.App-link {
-  color: #61dafb;
 }
 
 @keyframes App-logo-spin {
@@ -39,4 +37,9 @@
   height: 32.5px;
   font-size: 16px;
   cursor: pointer;
+}
+
+.app-content {
+  justify-content: center;
+  align-content: center;
 }

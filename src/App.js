@@ -6,6 +6,7 @@ function App() {
   const [url, setUrl] = useState([]);
   // const [search, setSearch] = useState("");
   const [query, setQuery] = useState("");
+  const [wordsTimes, setWordsTimes] = useState("0");
 
   useEffect(() => {
     wordsExistTimes(query);
@@ -37,6 +38,11 @@ function App() {
   const updateUrl = (e) => {
     setUrl(e.target.value);
   };
+
+  const updateWordsTimes = (e) => {
+    getQuery(e.target.value);
+  };
+
   return (
     <div className="App">
       <img
@@ -47,24 +53,22 @@ function App() {
 
       <div className="app-content">
         <form className="search_form" onSubmit={getQuery}>
-          <label htmlFor="">Words</label>
-          <input
-            className="word_input"
-            type="text"
-            value={words}
-            onChange={updateWords}
-          />
-          <label htmlFor="">URL</label>
-          <input
-            className="url_input"
-            type="text"
-            value={url}
-            onChange={updateUrl}
-          />
+          <div className="word_input">
+            <label htmlFor="">Words</label>
+            <input type="text" value={words} onChange={updateWords} />
+          </div>
+          <div className="url_input">
+            <label htmlFor="">URL</label>
+            <input type="text" value={url} onChange={updateUrl} />
+          </div>
+
           <button className="search_button" type="submit">
             Search
           </button>
         </form>
+        <span className="words_times">
+          Total times of the words in URL: {updateWordsTimes}
+        </span>
       </div>
     </div>
   );
