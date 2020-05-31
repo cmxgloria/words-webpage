@@ -1,21 +1,37 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
-import { getWordCount } from "./helper";
+import { getWordCount, getCleanedText, isValidUrl } from "./helper";
+import Loader from "./components/Loader";
 
 function App() {
   const [word, setWord] = useState("");
+  const [loading, setLoading] = useState(false);
   const [url, setUrl] = useState("");
   const [count, setCount] = useState();
 
   const countWordFrequencies = async (e) => {
     e.preventDefault();
+    if (!word.trim()) {
+      alert("Please provide a word");
+      return;
+    }
+    if (!isValidUrl(url)) {
+      alert("Please provide a valid url");
+      return;
+    }
+    setLoading(true);
+    setCount("");
+    const proxyUrl = "https://cors-anywhere.herokuapp.com/";
     try {
-      const response = await fetch(url, { mode: "cors" });
-      const text = await response.text();
-      const c = getWordCount(word, text);
-      console.log(text);
+      const response = await fetch(proxyUrl + url, { mode: "cors" });
+      const htmlString = await response.text();
+      const cleanedText = getCleanedText(htmlString);
+      const c = getWordCount(word, cleanedText);
+      console.log(cleanedText);
       setCount(c);
+      setLoading(false);
     } catch (error) {
+      setLoading(false);
       alert(`Crawl ${url} failed`);
     }
   };
@@ -51,9 +67,12 @@ function App() {
             Search
           </button>
         </form>
+
         <span className="words_times">
-          Total times of the words in URL: {count}
+          Total times of the words in URL {url}:
         </span>
+        {loading && <Loader />}
+        <h2>{count}</h2>
       </div>
     </div>
   );
