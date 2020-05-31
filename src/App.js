@@ -1,46 +1,31 @@
 import React, { useEffect, useState } from "react";
 import "./App.css";
+import { getWordCount } from "./helper";
 
 function App() {
-  const [words, setWords] = useState([]);
-  const [url, setUrl] = useState([]);
-  // const [search, setSearch] = useState("");
-  const [query, setQuery] = useState("");
-  const [wordsTimes, setWordsTimes] = useState("0");
+  const [word, setWord] = useState("");
+  const [url, setUrl] = useState("");
+  const [count, setCount] = useState();
 
-  useEffect(() => {
-    wordsExistTimes(query);
-  }, [query]);
-
-  const wordsExistTimes = async (qs) => {
-    const apiUrl = "";
-    const respond = await fetch(apiUrl);
-    const data = await respond.json();
-    // console.log(data);
-    setWords(data);
-  };
-
-  const getQuery = (e) => {
+  const countWordFrequencies = async (e) => {
     e.preventDefault();
-    setQuery(words);
-    setWords("");
-    setQuery(url);
-    setUrl("");
+    try {
+      const response = await fetch(url, { mode: "cors" });
+      const text = await response.text();
+      const c = getWordCount(word, text);
+      console.log(text);
+      setCount(c);
+    } catch (error) {
+      alert(`Crawl ${url} failed`);
+    }
   };
 
-  // const updateSearch = (e) => {
-  //   setSearch(e.target.value);
-  // };
   const updateWords = (e) => {
-    setWords(e.target.value);
+    setWord(e.target.value);
   };
 
   const updateUrl = (e) => {
     setUrl(e.target.value);
-  };
-
-  const updateWordsTimes = (e) => {
-    getQuery(e.target.value);
   };
 
   return (
@@ -52,10 +37,10 @@ function App() {
       <h1>WELCOME TO CIRCLE IN</h1>
 
       <div className="app-content">
-        <form className="search_form" onSubmit={getQuery}>
+        <form className="search_form" onSubmit={countWordFrequencies}>
           <div className="word_input">
-            <label htmlFor="">Words</label>
-            <input type="text" value={words} onChange={updateWords} />
+            <label htmlFor="">Word</label>
+            <input type="text" value={word} onChange={updateWords} />
           </div>
           <div className="url_input">
             <label htmlFor="">URL</label>
@@ -67,7 +52,7 @@ function App() {
           </button>
         </form>
         <span className="words_times">
-          Total times of the words in URL: {updateWordsTimes}
+          Total times of the words in URL: {count}
         </span>
       </div>
     </div>
