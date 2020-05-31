@@ -22,6 +22,7 @@ function App() {
     }
     setLoading(true);
     setCount("");
+    setHtmlText("");
     const proxyUrl = "https://cors-anywhere.herokuapp.com/";
     try {
       const response = await fetch(proxyUrl + url, { mode: "cors" });
