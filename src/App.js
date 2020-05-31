@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import "./App.css";
 import { getWordCount, getCleanedText, isValidUrl } from "./helper";
 import Loader from "./components/Loader";
@@ -51,33 +51,44 @@ function App() {
         src="https://circlein.com/wp-content/uploads/elementor/thumbs/CI-Landscape-Gradient-1-onirtzjrdivx2a3xb8n0t81wxk108wwio6undogxhi.png"
         alt="logo"
       />
-      <h1>WELCOME TO CIRCLE IN</h1>
+      <h2>Check number of times that word exists in the given URL page</h2>
 
       <div className="app-content">
         <form className="search_form" onSubmit={countWordFrequencies}>
-          <div className="word_input">
-            <label htmlFor="">Word</label>
-            <input type="text" value={word} onChange={updateWords} />
+          <div className="input_wrapper">
+            <label className="word_input">Word:</label>
+            <input
+              className="input"
+              type="text"
+              value={word}
+              onChange={updateWords}
+            />
           </div>
-          <div className="url_input">
-            <label htmlFor="">URL</label>
-            <input type="text" value={url} onChange={updateUrl} />
+          <div className="input_wrapper">
+            <label className="url_input">URL:</label>
+            <input
+              className="input"
+              type="text"
+              value={url}
+              onChange={updateUrl}
+            />
           </div>
 
           <button className="search_button" type="submit">
-            Search
+            Crawl
           </button>
         </form>
 
         <span className="words_times">
-          Total number of the word <strong>{word}</strong> appear on page{" "}
-          <strong>{url}</strong>:
+          Total number of the word{" "}
+          <strong style={{ color: "#e60278" }}>{word}</strong> appear on page{" "}
+          <strong style={{ color: "#e60278" }}>{url}</strong>:
         </span>
         {loading && <Loader />}
         <h2>{count}</h2>
         {htmlText && (
           <div>
-            <h3>Crawled Text from {url}: </h3>
+            <h3 style={{ color: "#e60278" }}>Crawled Text from {url}: </h3>
             <textarea
               style={{
                 height: "300px",

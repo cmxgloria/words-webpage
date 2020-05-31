@@ -2,22 +2,12 @@
   justify-content: center;
   text-align: center;
   height: 100vh;
+  margin: 20px 50px;
 }
-
-.img {
-  margin-top: 30px;
-  pointer-events: none;
-}
-
-.App-header {
-  background-color: rgb(238, 227, 227);
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+@media only screen and (max-width: 600px) {
+  .App {
+    margin: 20px;
+  }
 }
 
 @keyframes App-logo-spin {
@@ -33,13 +23,32 @@
   box-sizing: border-box;
   background: coral;
   padding: 10px, 20px;
+  margin: 10px 0 30px 0;
   color: white;
-  height: 32.5px;
+  height: 40px;
   font-size: 16px;
   cursor: pointer;
+  width: 140px;
+  border-radius: 8px;
 }
 
 .app-content {
   justify-content: center;
   align-content: center;
+}
+.word_input {
+  margin: auto 10px;
+}
+
+.url_input {
+  margin: auto 14px;
+}
+
+.input {
+  line-height: 24px;
+  width: 200px;
+  font-size: 14px;
+}
+.input_wrapper {
+  margin: 20px 0;
 }
