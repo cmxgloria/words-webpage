@@ -51,7 +51,9 @@ function App() {
         src="https://circlein.com/wp-content/uploads/elementor/thumbs/CI-Landscape-Gradient-1-onirtzjrdivx2a3xb8n0t81wxk108wwio6undogxhi.png"
         alt="logo"
       />
-      <h2>Check number of times that word exists in the given URL page</h2>
+      <h2 className="header">
+        check number of times that word exists in the given url page
+      </h2>
 
       <div className="app-content">
         <form className="search_form" onSubmit={countWordFrequencies}>

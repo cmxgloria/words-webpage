@@ -10,15 +10,10 @@
   }
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.header {
+  margin: 30px auto;
+  max-width: 400px;
 }
-
 .search_button {
   box-sizing: border-box;
   background: coral;
