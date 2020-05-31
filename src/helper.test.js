@@ -13,7 +13,7 @@ describe("helper", () => {
       const htmlString =
         '<html><head></head><body><h2 class="title welcome">Hello there 123!</h2></body></html>';
       const text = getCleanedText(htmlString);
-      const expectedText = "Hello there 123  ";
+      const expectedText = "Hello there 123 ";
       expect(text).toBe(expectedText);
     });
   });

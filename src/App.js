@@ -8,6 +8,7 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [url, setUrl] = useState("");
   const [count, setCount] = useState();
+  const [htmlText, setHtmlText] = useState("");
 
   const countWordFrequencies = async (e) => {
     e.preventDefault();
@@ -26,9 +27,9 @@ function App() {
       const response = await fetch(proxyUrl + url, { mode: "cors" });
       const htmlString = await response.text();
       const cleanedText = getCleanedText(htmlString);
-      const c = getWordCount(word, cleanedText);
-      console.log(cleanedText);
-      setCount(c);
+      const count = getWordCount(word, cleanedText);
+      setHtmlText(cleanedText);
+      setCount(count);
       setLoading(false);
     } catch (error) {
       setLoading(false);
@@ -69,10 +70,26 @@ function App() {
         </form>
 
         <span className="words_times">
-          Total times of the words in URL {url}:
+          Total number of the word <strong>{word}</strong> appear on page{" "}
+          <strong>{url}</strong>:
         </span>
         {loading && <Loader />}
         <h2>{count}</h2>
+        {htmlText && (
+          <div>
+            <h3>Crawled Text from {url}: </h3>
+            <textarea
+              style={{
+                height: "300px",
+                maxWidth: "600px",
+                width: "100%",
+                margin: "20px",
+              }}
+              readOnly
+              value={htmlText}
+            />
+          </div>
+        )}
       </div>
     </div>
   );

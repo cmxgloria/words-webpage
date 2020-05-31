@@ -12,7 +12,8 @@ export const getCleanedText = (htmlString) => {
     })
     .get()
     .join("")
-    .replace(/[^\w]/g, " ");
+    .replace(/[^\w]/g, " ")
+    .replace(/\s+/g, " ");
   return text;
 };
 
