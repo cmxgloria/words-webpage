@@ -1,6 +1,6 @@
 import cheerio from "cheerio";
 
-export const getBodyText = (htmlString) => {
+export const getCleanedText = (htmlString) => {
   const $ = cheerio.load(htmlString);
   const text = $("html *")
     .not($("script")) // ignore script
@@ -11,7 +11,8 @@ export const getBodyText = (htmlString) => {
       return this.type === "text" ? $(this).text() + " " : "";
     })
     .get()
-    .join("");
+    .join("")
+    .replace(/[^\w]/g, " ");
   return text;
 };
 
@@ -19,9 +20,16 @@ export const getWordCount = (word, text) => {
   const wordsArray = text.split(/\s+/);
   let count = 0;
   wordsArray.forEach((w) => {
-    if (w === word) {
+    if (w.toLowerCase() === word.toLowerCase()) {
       count++;
     }
   });
   return count;
+};
+// https://stackoverflow.com/questions/5717093/check-if-a-javascript-string-is-a-url
+export const isValidUrl = (string) => {
+  var res = string.match(
+    /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&//=]*)/g
+  );
+  return res !== null;
 };
